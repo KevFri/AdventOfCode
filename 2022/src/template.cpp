@@ -2,8 +2,17 @@
 
 #include <filesystem>
 #include <fstream>
+#include <functional>
 #include <string>
 #include <vector>
+
+#define DEBUG 0
+
+void debug(std::function<void(void)> func) {
+#if DEBUG
+  func();
+#endif
+}
 
 const std::vector<std::string> getInput(std::filesystem::path fname) {
   auto ifs = std::ifstream{fname};
@@ -20,7 +29,9 @@ const std::vector<std::string> getInput(std::filesystem::path fname) {
 int main() {
   const auto lines = getInput("input/input01.txt");
 
-  for (const auto& line : lines) {
-    fmt::print("{}\n", line);
-  }
+  debug([&] {
+    for (const auto& line : lines) {
+      fmt::print("{}\n", line);
+    }
+  });
 }
