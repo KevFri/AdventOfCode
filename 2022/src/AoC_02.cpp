@@ -8,11 +8,11 @@
 #include <string>
 #include <vector>
 
-#define DEBUG 1
+#define DEBUG 0
 
-void debug(std::function<void(void)> func) {
+void debug(std::string str) {
 #if DEBUG
-  func();
+  fmt::print("{}", str);
 #endif
 }
 

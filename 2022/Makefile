@@ -1,4 +1,4 @@
-all: template day01 day02
+all: template day01 day02 day03 day03_2
 	
 template:
 	g++ -std=c++20 src/template.cpp -o bin/template.out -lfmt
@@ -11,6 +11,14 @@ day01:
 day02:
 	g++ -std=c++20 src/AoC_02.cpp -o bin/AoC_02.out -lfmt
 	./bin/AoC_02.out
+
+day03:
+	g++ -std=c++20 src/AoC_03.cpp -o bin/AoC_03.out -lfmt
+	./bin/AoC_03.out
+	
+day03_2:
+	g++ -std=c++20 src/AoC_03_2.cpp -o bin/AoC_03_2.out -lfmt
+	./bin/AoC_03_2.out
 
 clean:
 	rm bin/*

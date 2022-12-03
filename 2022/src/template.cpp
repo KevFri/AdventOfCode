@@ -8,13 +8,14 @@
 
 #define DEBUG 0
 
-void debug(std::function<void(void)> func) {
+void debug(std::string str) {
 #if DEBUG
-  func();
+  fmt::print("{}", str);
 #endif
 }
 
-const std::vector<std::string> getInput(std::filesystem::path fname) {
+[[nodiscard]] const std::vector<std::string> getInput(
+    std::filesystem::path fname) {
   auto ifs = std::ifstream{fname};
 
   auto vec = std::vector<std::string>{};
@@ -27,11 +28,9 @@ const std::vector<std::string> getInput(std::filesystem::path fname) {
 }
 
 int main() {
-  const auto lines = getInput("input/input01.txt");
+  const auto lines = getInput("input/input00.txt");
 
-  debug([&] {
-    for (const auto& line : lines) {
-      fmt::print("{}\n", line);
-    }
-  });
+  for (const auto& line : lines) {
+    debug(fmt::format("{}\n", line));
+  };
 }

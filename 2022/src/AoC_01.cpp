@@ -10,12 +10,11 @@
 
 #define DEBUG 0
 
-void debug(std::function<void(void)> func) {
+void debug(std::string str) {
 #if DEBUG
-  func();
+  fmt::print("{}", str);
 #endif
 }
-
 const std::vector<std::string> getInput(std::filesystem::path fname) {
   auto ifs = std::ifstream{fname};
 
@@ -45,7 +44,7 @@ int main() {
   for (const auto& line : lines) {
     int calories = std::atoi(line.c_str());
 
-    debug([&] { fmt::print("{}\t{}\n", line, calories); });
+    debug(fmt::format("{}\t{}\n", line, calories));
 
     if (calories != 0) {
       elve.calories += calories;
@@ -59,11 +58,9 @@ int main() {
     }
   }
 
-  debug([&] {
-    for (const auto& elve : elves) {
-      fmt::print("elve {}\t{}\n", elve.num, elve.calories);
-    }
-  });
+  for (const auto& elve : elves) {
+    debug(fmt::format("elve {}\t{}\n", elve.num, elve.calories));
+  }
 
   auto it = std::max_element(begin(elves), end(elves));
 
@@ -75,18 +72,16 @@ int main() {
 
   std::sort(begin(elves), end(elves));
 
-  debug([&] {
-    for (const auto& elve : elves) {
-      fmt::print("elve {:6}\t{}\n", elve.num, elve.calories);
-    }
-    fmt::print("\n");
-  });
+  for (const auto& elve : elves) {
+    debug(fmt::format("elve {:6}\t{}\n", elve.num, elve.calories));
+  }
+  debug("\n");
 
   auto calSum = 0;
   for (auto it = std::prev(end(elves), 3); it < end(elves); ++it) {
     auto elve = *it;
 
-    debug([&] { fmt::print("elve {:6}\t{}\n", elve.num, elve.calories); });
+    debug(fmt::format("elve {:6}\t{}\n", elve.num, elve.calories));
 
     calSum += elve.calories;
   };
