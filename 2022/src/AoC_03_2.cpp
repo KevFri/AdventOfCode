@@ -40,6 +40,8 @@ struct Group {
 
 int main() {
   const auto lines = getInput("input/input03.txt");
+
+  // sort three lines of elves to a group
   std::vector<Group> groups{};
   Group group;
   for (size_t i = 0; i < lines.size(); ++i) {
@@ -58,25 +60,30 @@ int main() {
     }
   }
 
-  auto sum = 0;
+  // loop over groups and find character which are same in each elve rucksack
+  int sum = 0;
   for (const auto& group : groups) {
-    debug(fmt::format("{:50}{:50}{:50}\n", group.elve1, group.elve2,
-                      group.elve3));
+    // lambda for filtering character in elve2
+    const auto find_elve2 = [&](const auto c) {
+      return group.elve2.find(c) != std::string::npos;
+    };
 
-    char item = ' ';
-    std::ranges::for_each(group.elve1, [&](auto c) {
-      auto it = std::ranges::find(group.elve2, c);
-      if (it != group.elve2.end()) {
-        auto it2 = std::ranges::find(group.elve3, *it);
-        if (it2 != group.elve3.end()) {
-          debug(fmt::format("{}\n", *it2));
-          item = *it2;
-        }
-      }
-    });
-    auto priority = islower(item) ? (item - 'a' + 1) : (item - 'A' + 27);
-    sum += priority;
-    debug("\n");
+    // lambda for filtering character in elve3
+    const auto find_elve3 = [&](const auto c) {
+      return group.elve3.find(c) != std::string::npos;
+    };
+
+    // for each character in elve1 filter elve2 and elve3, than take one result
+    for (const auto item :
+         std::views::all(group.elve1) | std::views::filter(find_elve2) |
+             std::views::filter(find_elve3) | std::views::take(1)) {
+      // calculate priority and sum up
+      auto priority = islower(item) ? (item - 'a' + 1) : (item - 'A' + 27);
+      sum += priority;
+      debug(fmt::format("{:50}{:50}{:50} {}\n", group.elve1, group.elve2,
+                        group.elve3, item));
+    }
   }
+
   fmt::print("sum of priority badge: {}\n", sum);
 }
