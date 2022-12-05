@@ -38,7 +38,6 @@ int main() {
   int sum = 0;
   for (const auto& line : lines) {
     auto b = begin(line);
-    auto e = end(line);
     auto s = line.size();
 
     auto compartment1 = std::span{b, s / 2};

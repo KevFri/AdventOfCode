@@ -162,7 +162,7 @@ struct Game {
   }
 
   // constructor for game 2
-  Game(Shape opponent, Winner winner) : player(player), winner(winner) {
+  Game(Shape opponent, Winner winner) : opponent(opponent), winner(winner) {
     player = game2(opponent, winner);
   }
 };
