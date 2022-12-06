@@ -1,6 +1,6 @@
-FLAGS=-Wall -Werror -Wpedantic -Wconversion -Wcast-align -Wunused -Wshadow -Wold-style-cast -Ofast
+FLAGS=-Wall -Wpedantic -Wconversion -Wcast-align -Wunused -Wshadow -Wold-style-cast -Ofast #-Werror
 
-all: template day01 day02 day03 day03_2 day04 day04_2 day05 day05_2
+all: template day01 day02 day03 day03_2 day04 day04_2 day05 day05_2 day06 day06_2
 	
 template:
 	g++ -std=c++20 src/template.cpp -o bin/template.out -lfmt ${FLAGS}
@@ -37,6 +37,14 @@ day05:
 day05_2:
 	g++ -std=c++20 src/AoC_05_2.cpp -o bin/AoC_05_2.out -lfmt ${FLAGS}
 	./bin/AoC_05_2.out
+
+day06:
+	g++ -std=c++20 src/AoC_06.cpp -o bin/AoC_06.out -lfmt ${FLAGS}
+	./bin/AoC_06.out
+
+day06_2:
+	g++ -std=c++20 src/AoC_06_2.cpp -o bin/AoC_06_2.out -lfmt ${FLAGS}
+	./bin/AoC_06_2.out
 
 clean:
 	rm bin/*
