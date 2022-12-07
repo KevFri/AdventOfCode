@@ -46,5 +46,9 @@ day06_2:
 	g++ -std=c++20 src/AoC_06_2.cpp -o bin/AoC_06_2.out -lfmt ${FLAGS}
 	./bin/AoC_06_2.out
 
+day07:
+	g++ -std=c++20 src/AoC_07.cpp -o bin/AoC_07.out -lfmt ${FLAGS}
+	./bin/AoC_07.out
+
 clean:
 	rm bin/*
